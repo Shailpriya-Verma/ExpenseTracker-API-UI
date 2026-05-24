@@ -1,0 +1,134 @@
+﻿
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: url('/images/Exp_image2.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+}
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(4px);
+        z-index: -1;
+    }
+
+.expense-container {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 20px;
+    padding: 35px;
+    margin-top: 40px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.heading {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: white;
+    font-size: 38px;
+}
+
+.form-control,
+.form-select {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white !important;
+    height: 45px;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        box-shadow: none;
+        border-color: #ffffff;
+        background: rgba(255,255,255,0.12) !important;
+    }
+
+    .form-control::placeholder {
+        color: rgba(255,255,255,0.7);
+    }
+
+option {
+    color: black;
+}
+
+.table_container {
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+}
+.table {
+    color: white;
+    margin-top: 30px;
+}
+
+    .table th {
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(255,255,255,0.15);
+        color: white;
+    }
+
+    .table td {
+        background: rgba(255,255,255,0.05);
+        border-color: rgba(255,255,255,0.1);
+        vertical-align: middle;
+    }
+
+.btn-success {
+    background: rgba(25,135,84,0.8);
+    border: none;
+    backdrop-filter: blur(10px);
+}
+
+.btn-primary {
+    background: rgba(13,110,253,0.8);
+    border: none;
+}
+
+.btn-danger {
+    background: rgba(220,53,69,0.8);
+    border: none;
+}
+
+.btn:hover {
+    transform: scale(1.03);
+    transition: 0.3s;
+}
+
+.total-section {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.filter-section {
+    margin-top: 25px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.validation {
+    font-size: 14px;
+    color: #ffb3b3 !important;
+}
+

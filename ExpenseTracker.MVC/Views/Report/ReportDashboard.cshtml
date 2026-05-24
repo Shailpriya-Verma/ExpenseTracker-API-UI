@@ -1,0 +1,270 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Expense Reports";
+}
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/ReportDashboard.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/ReportDashboard.js"></script>
+
+
+<script>
+    var token= '@Context.Session.GetString("JWToken")'
+</script>
+    <div class="container">
+
+        <partial name="_TopBar">
+
+
+        <div class="dashboard-container">
+
+            <!-- Heading -->
+            <h1 class="heading">
+                Expense Reports Dashboard
+            </h1>
+
+            <!-- Tabs -->
+            <div class="report-tabs">
+
+                <div class="report-tab active-tab monthTab">
+                    Monthly Report
+                </div>
+
+                <div class="report-tab dateTab">
+                    Date Range Report
+                </div>
+
+            </div>
+
+            <!-- Monthly Report Filters -->
+            <div class="glass-box mb-4 monthRangeBox">
+
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+
+                        <select class="form-select" id="month">
+
+                            <option value="">Select Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <select class="form-select" id="year">
+                        @{
+                            var currentYear = DateTime.Now.Year;
+                            var prevYear = DateTime.Now.Year-1;
+                        }
+                            <option value="">Select Year</option>
+                        <option value="@prevYear">@prevYear</option>
+                        <option value="@currentYear">@currentYear</option>
+
+                        
+                        </select>
+
+                    </div>
+
+                    <!-- Button -->
+                    <div class="col-md-4">
+
+                        <button class="btn-report" id="GenerateMonthlyReport">
+                            Generate Monthly Report
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Date Range Filters -->
+            <div class="glass-box mb-4 dateRangeBox">
+
+                <div class="row g-3">
+
+                    <!-- From Date -->
+                    <div class="col-md-4">
+
+                        <input type="date" id="fromDate"
+                               class="form-control" />
+
+                    </div>
+
+                    <!-- To Date -->
+                    <div class="col-md-4">
+
+                        <input type="date" id="toDate"
+                               class="form-control" />
+
+                    </div>
+
+                    <!-- Button -->
+                    <div class="col-md-4">
+
+                        <button class="btn-report" id="GenerateDateRangeReport">
+                            Generate Date Range Report
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+            <!-- Detailed Expense Table -->
+            <div class="glass-box mb-4 ">
+
+                <div class="section-title">
+                    Expense Records
+                </div>
+                <div class="table_container">
+                    <table class="table table-bordered">
+
+                        <thead>
+
+                            <tr>
+                                <th>Expense Name</th>
+                                <th>Amount</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="expenseRecordTable">
+                        </tbody>
+
+                    </table>
+
+                </div>
+               
+            </div>
+
+
+
+
+
+
+            <!-- Top Cards -->
+            <div class="row g-4 mb-4" id="totalCardsBox">
+
+                <!-- Total Expense -->
+                <div class="col-md-6">
+
+                    <div class="glass-box report-card">
+
+                        <div class="report-title">
+                            Monthly Total Expense
+                        </div>
+
+                        <div class="report-value" id="month_total">
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Highest Category -->
+                <div class="col-md-6">
+
+                    <div class="glass-box report-card">
+
+                        <div class="report-title">
+                            Highest Expense Category
+                        </div>
+
+                        <div class="report-value" id="maxCategoryName">
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Chart + Category Summary -->
+            <div class="row g-4 mb-4" id="catChartBox">
+
+                <!-- Chart -->
+                <div class="col-md-6">
+
+                    <div class="glass-box">
+
+                        <div class="section-title">
+                            Expense Category Chart
+                        </div>
+
+                        <div class="chart-container">
+
+                            <canvas id="expenseChart"></canvas>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Category Summary -->
+                <div class="col-md-6">
+
+                    <div class="glass-box">
+
+                        <div class="section-title">
+                            Category Summary
+                        </div>
+
+                        <table class="table table-bordered">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Total Expense</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="categoryWiseExpense">
+
+                                
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

@@ -1,0 +1,160 @@
+﻿@model ExpenseTracker.MVC.Models.ExpenseModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Expense Tracker";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/ExpenseTracker.MVC.styles.css" asp-append-version="true" />
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+
+<script>
+    var token = '@Context.Session.GetString("JWToken")';
+</script>
+
+<link href="~/css/expenseindex.css" rel="stylesheet" />
+<script src="~/js/ExpenseIndex.js"></script>
+
+
+
+
+
+
+
+<div class="container">
+    <partial name="_TopBar" />
+
+    <div class="expense-container">
+
+        <h1 class="heading">Expense Tracker</h1>
+
+        <form method="post" id="expenseForm">
+
+            <div class="row mb-2">
+
+
+                <input type="hidden" id="ExpenseId" />
+
+
+                <div class="col-md-3">
+                    <input asp-for="Title"
+                           class="form-control"
+                           placeholder="Expense Name *" />
+
+                    <span asp-validation-for="Title"
+                          class="text-danger validation"></span>
+                </div>
+
+                @* <div class="col-md-3">
+                    <input asp-for="Description"
+                           class="form-control"
+                           placeholder="Expense Description" />
+
+                    <span asp-validation-for="Description"
+                          class="text-danger validation"></span>
+                </div> *@
+
+
+
+                <div class="col-md-2">
+                    <input asp-for="Amount"
+                           class="form-control"
+                           placeholder="Amount *" />
+
+                    <span asp-validation-for="Amount"
+                          class="text-danger validation"></span>
+                </div>
+
+                <div class="col-md-3">
+
+                    <select asp-for="CategoryId"
+                            asp-items="ViewBag.CategoryList"
+                            class="form-select text-black">
+
+                        <option value="">Select Category *</option>
+
+                    </select>
+
+                    <span asp-validation-for="CategoryId"
+                          class="text-danger validation"></span>
+                </div>
+
+                <div class="col-md-2">
+
+                    <input asp-for="ExpenseDate"
+                           type="date"
+                           class="form-control" />
+
+                    <span asp-validation-for="ExpenseDate"
+                          class="text-danger validation"></span>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <button type="submit" id="expSubmitUpdateBtn" class="btn btn-success w-100"> Add Expense</button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- **************** Expense Table **************** -->
+
+        <div class="table_container">
+            <table class="table table-bordered mt-4">
+
+                <thead>
+
+                    <tr>
+                        <th>Expense Name</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th width="160">Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="ExpenseTableData">
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+    
+
+        @* <!-- Total -->
+        <div class="total-section">
+            Total: $70.00
+        </div>
+
+        <!-- Filter -->
+        <div class="filter-section">
+
+            <label><b>Filter by Category:</b></label>
+
+            <select class="form-select w-auto">
+
+                <option>All</option>
+                <option>Food</option>
+                <option>Transport</option>
+
+            </select>
+
+        </div> *@
+
+    </div>
+
+</div>
+
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

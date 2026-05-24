@@ -1,0 +1,160 @@
+﻿
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: url('/images/Exp_image2.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(4px);
+        z-index: -1;
+    }
+
+.dashboard-container {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 20px;
+    padding: 35px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.heading {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+.glass-box {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    
+}
+
+.report-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.report-tab {
+    padding: 12px 25px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.active-tab {
+    background: rgba(25,135,84,0.85);
+}
+
+.form-select,
+.form-control {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white !important;
+    height: 45px;
+}
+
+    .form-select:focus,
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #ffffff;
+        background: rgba(255,255,255,0.12) !important;
+    }
+
+option {
+    color: black;
+}
+
+.btn-report {
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(25,135,84,0.85);
+    color: white;
+    font-weight: bold;
+}
+
+    .btn-report:hover {
+        transform: scale(1.02);
+        transition: 0.3s;
+    }
+
+.report-card {
+    text-align: center;
+    padding: 25px;
+    height: 100%;
+}
+
+.report-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: rgba(255,255,255,0.8);
+}
+
+.report-value {
+    font-size: 38px;
+    font-weight: bold;
+    color: white;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.table_container {
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+}
+
+.table {
+    color: white;
+    margin-bottom: 0;
+}
+
+    .table th {
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(255,255,255,0.15);
+        color: white;
+    }
+
+    .table td {
+        background: rgba(255,255,255,0.05);
+        border-color: rgba(255,255,255,0.1);
+        vertical-align: middle;
+    }
+
+.chart-container {
+    position: relative;
+    height: 350px;
+}
