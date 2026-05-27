@@ -1,6 +1,6 @@
 ﻿
     
-
+const ApiUrl = "https://localhost:7076/api/";
 
 
 $(document).ready(function () {
@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     $("#month").val(currentMonth);
     $("#year").val(currentYear);
-
+    $("#txt_ExpenseRecords").text("Monthly Expense Records");
 
         $(".dateTab").click(function () {
             $(".dateRangeBox").show();
@@ -30,6 +30,7 @@ $(document).ready(function () {
             $("#totalCardsBox").hide();
 
             $("#expenseRecordTable").empty();
+            $("#txt_ExpenseRecords").text("Date Wise Expense Records");
         });
 
         $(".monthTab").click(function () {
@@ -41,6 +42,7 @@ $(document).ready(function () {
             $("#catChartBox").show();
             $("#totalCardsBox").show();
             getMonthlyExpenseRecord(currentMonth, currentYear);
+            $("#txt_ExpenseRecords").text("Monthly Expense Records");
         });
 
 
@@ -82,7 +84,7 @@ $(document).ready(function () {
 
 function getMonthlyExpenseRecord(month, year) {
     $.ajax({
-        url: 'https://localhost:7076/api/Reports/monthly_expenses',
+        url: ApiUrl+'Reports/monthly_expenses',
         type: 'GET',
         headers: {
             "Authorization":"Bearer "+token
@@ -101,6 +103,7 @@ function getMonthlyExpenseRecord(month, year) {
                     total += parseFloat(item.amount);
                     result += `
                     <tr>
+                        <td>${(i+1)}</td>
                         <td>${item.title}</td>
                         <td>&#8377; ${item.amount}</td>
                         <td>${item.categoryName}</td>
@@ -182,7 +185,7 @@ function getMonthlyTotal(month, year)
 }
 function getMonthlyCategoryWiseExpenseTotal(month, year) {
     $.ajax({
-        url: 'https://localhost:7076/api/Reports/CategoryWiseExpenseTotal',
+        url: ApiUrl +'Reports/CategoryWiseExpenseTotal',
         type: 'GET',
         headers: {
             "Authorization": "Bearer " + token
@@ -243,7 +246,7 @@ function getMonthlyCategoryWiseExpenseTotal(month, year) {
 function getDateWiseExpenseReport(fromDate, toDate) {
 
     $.ajax({
-        url: 'https://localhost:7076/api/Reports/date_range',
+        url: ApiUrl +'Reports/date_range',
         type: 'GET',
         headers: {
             "Authorization":"Bearer "+token
@@ -259,6 +262,7 @@ function getDateWiseExpenseReport(fromDate, toDate) {
                     total += parseFloat(item.amount);
                     result += `
                     <tr>
+                        <td>${(i + 1)}</td>
                         <td>${item.title}</td>
                         <td>&#8377; ${item.amount}</td>
                         <td>${item.categoryName}</td>

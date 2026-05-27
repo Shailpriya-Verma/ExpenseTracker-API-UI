@@ -1,4 +1,5 @@
-﻿
+﻿const ApiUrl = "https://localhost:7076/api/";
+
 $(document).ready(function () {
     loadExpense();
 
@@ -12,7 +13,7 @@ $(document).ready(function () {
 
 
         let ExpenseId = $("#ExpenseId").val();
-        let apiurl ="https://localhost:7076/api/expenses";
+        let apiurl =ApiUrl+"expenses";
         let reqType="POST"
         let expense = {
             title: $("#Title").val(),
@@ -59,7 +60,7 @@ $(document).ready(function () {
 function loadExpense()
 {
     $.ajax({
-        url: 'https://localhost:7076/api/Reports/GetAllExpensesOfToday',
+        url: ApiUrl +'Reports/GetLatest20Expenses',
         type: 'GET',
         headers: {
             "Authorization": "Bearer "+token
@@ -72,6 +73,7 @@ function loadExpense()
                     console.log(item);
                     result += `
                     <tr>
+                        <td >` + (i+1) + `</td>
                         <td id="td_title_${item.expenseId}">`+ item.title + `</td>
                         <td id="td_amount_${item.expenseId}">`+ item.amount + `</td>
                         <td id="td_catname_${item.expenseId}">`+ item.categoryName + `</td>
@@ -137,7 +139,7 @@ function DeleteExpense(id) {
     var res = confirm("Are you sure, you want to delete this expense ?? ");
     if (res) {
         $.ajax({
-            url: 'https://localhost:7076/api/expenses/'+id,
+            url: ApiUrl + 'expenses/' + id,
             type: 'DELETE',
             headers: {
                 Authorization:'Bearer '+token

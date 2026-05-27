@@ -148,13 +148,13 @@ namespace ExpenseTracker.API.Controllers
 
 
 
-        #region GetAllExpensesOfToday
-        [HttpGet("GetAllExpensesOfToday")]
-        public async Task<IActionResult> GetAllExpensesOfToday()
+        #region GetLatestExpenses
+        [HttpGet("GetLatest20Expenses")]
+        public async Task<IActionResult> GetLatestExpenses()
         {
             int userId = GetLoggedInUserId();
             var expenses = await dbContext.tbl_Expense
-                .Where(e => e.UserId == userId && e.ExpenseDate == DateTime.UtcNow.Date)
+                .Where(e => e.UserId == userId)
                 .Select(
                     e => new ExpenseReadDto
                     {
@@ -166,11 +166,11 @@ namespace ExpenseTracker.API.Controllers
                         CategoryId = e.CategoryId,
                         CategoryName = e.Category.Name
                     }
-                ).OrderByDescending(e => e.ExpenseDate).ThenByDescending(e => e.ExpenseId)
+                ).OrderByDescending(e => e.ExpenseDate).ThenByDescending(e => e.ExpenseId).Take(10)
                 .ToListAsync();
             return Ok(new { success = true, expenses });
         }
-        #endregion GetAllExpensesOfToday
+        #endregion GetLatestExpenses
 
 
 
